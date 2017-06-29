@@ -11,33 +11,6 @@ OrderBookMgmt::OrderBookMgmt() noexcept {
 }
 
 void OrderBookMgmt::ask(PriceType price, VolType vol, bool _cancel) {
-    /*
-    if (get_gap(order_book_bid)!=OrderBook::NaN && price <= get_gap(order_book_bid)) {
-        auto iter = order_book_bid.begin();
-        auto v = vol;
-        while (v > 0 && iter != order_book_bid.end()) {
-            if (v >= iter->second) {
-                v -= iter->second;
-                order_book_bid.erase(iter++);
-                notify_order_match();
-            } else {
-                iter->second -= v;
-                v = 0;
-                notify_order_match();
-            }
-        }
-        if (v > 0) {   // a ask offer clear up all bids...
-            order_book_ask.insert(OrderPairType{price, v});
-        }
-    } else {       // price > gap_bid
-        auto iter = order_book_ask.find(price);
-        if (iter != order_book_ask.end()) {
-            iter->second += vol;
-        } else {
-            order_book_ask.insert(OrderPairType{price, vol});
-        }
-    }
-     */
     if(_cancel) {
         if(!cancel(price, vol, order_book_ask)) {
             cancel_err_handler();
@@ -48,34 +21,6 @@ void OrderBookMgmt::ask(PriceType price, VolType vol, bool _cancel) {
 }
 
 void OrderBookMgmt::bid(PriceType price, VolType vol, bool _cancel) {
-    /*
-    if (get_gap(order_book_ask)!=OrderBook::NaN && price >= get_gap(order_book_ask)) {
-        auto iter = order_book_ask.begin();
-        auto v = vol;
-        while (v > 0 && iter != order_book_ask.end()) {
-            if (v >= iter->second) {
-                v -= iter->second;
-                //iter->second = 0;
-                order_book_ask.erase(iter++);
-                notify_order_match();
-            } else {
-                iter->second -= v;
-                v = 0;
-                notify_order_match();
-            }
-        }
-        if (v > 0) {   // a bid offer clear up all asks...
-            order_book_bid.insert(OrderPairType{price, v});
-        }
-    } else {       // price < gap_ask
-        auto iter = order_book_bid.find(price);
-        if (iter != order_book_bid.end()) {
-            iter->second += vol;
-        } else {
-            order_book_bid.insert(OrderPairType{price, vol});
-        }
-    }
-     */
     if(_cancel) {
         if(!cancel(price, vol, order_book_bid)) {
             cancel_err_handler();
