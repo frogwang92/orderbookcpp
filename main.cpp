@@ -2,6 +2,7 @@
 #include <memory>
 #include "OrderBookMgmt.hpp"
 #include <random>
+#include <chrono>
 using namespace std;
 
 int main() {
@@ -11,8 +12,10 @@ int main() {
     std::uniform_int_distribution<int> distribution1(1,20000);
     std::uniform_int_distribution<int> distribution2(1,2);
     std::uniform_int_distribution<int> distribution3(1,100);
-    auto n = 0;
-    while( n < 100000) {
+    cout << "start" << endl;
+    auto start = std::chrono::system_clock::now();
+    auto n = 0, times = 10000000;
+    while( n < times) {
         int side_roll = distribution2(generator);
         int price_roll = distribution1(generator);
         int vol_roll = distribution3(generator);
@@ -24,7 +27,7 @@ int main() {
         }
         ++n;
     }
-
-
+    auto finish = std::chrono::system_clock::now();
+    cout << "finish, " << times << " order match, cost " << (finish - start).count() << "ns" << endl;
     return 0;
 }
