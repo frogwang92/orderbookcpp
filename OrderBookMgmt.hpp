@@ -24,7 +24,7 @@ public:
 
     OrderBookMgmt(const OrderBookMgmt &rhs) = delete;
 
-    OrderBookMgmt(const OrderBookMgmt &&rhs) = delete;
+    OrderBookMgmt(OrderBookMgmt &&rhs) = delete;
 
     OrderBookMgmt &operator=(const OrderBookMgmt &rhs) = delete;
 
@@ -65,20 +65,25 @@ private:
 
     // preserved, do some notif job when order matched
     void notify_order_match(OrderBook::PriceType _price, OrderBook::VolType _vol) const {
+        /*
         std::cout << "order matched: "
                 << " price: "
                 << _price
                 << " vol: "
                 << _vol
+
                 << std::endl;
+                */
     }
     void notify_order_cancel(OrderBook::PriceType _price, OrderBook::VolType _vol) const {
+        /*
         std::cout << "order cancelled: "
                   << " price: "
                   << _price
                   << " vol: "
                   << _vol
                   << std::endl;
+                  */
     }
 
     std::function<void(void)> cancel_err_handler;
